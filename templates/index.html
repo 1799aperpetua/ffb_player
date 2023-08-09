@@ -2,4 +2,13 @@
 
 {% block content %}
     <h1>{% block title %} Welcome to Fantasy Player Information {% endblock %}</h1>
+    {% for player in players %}
+    <br>
+        <a href="#">
+            <h3>{{player["player_name"]}} - {{player["team_name"]}}</h3>
+        </a>
+        <h5><span class="badge badge-primary"> {{player["position"]}}</span> &nbsp; Average Draft Position: {{player["adp"]}}</h5>
+        
+        <hr>
+    {% endfor %}
 {% endblock %}
