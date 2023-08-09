@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>{{player["name"]}} &nbsp; {{player["position"]}}</h1>
+    <h6>Question/Idea:  Can/Should we add an identifier column to our Player schema to identify this player's positional ranking within their team?  I.e. Aaron Jones-RB1, AJ Dillon-RB2</h6>
+    <h2>{{player["team_name"]}}</h2> 
+
+    <div class="grid-container">
+        <div class="tile crucial-info">
+            <p>Key Information</p>
+            <p>ADP: {{player["adp"]}}</p>
+            <p>Tier: {{player["position_tier"]}}</p>
+            <p>Rank: {{player["overall_rank"]}}</p>
+            <p>Positional Ranking: {{player["position_rank"]}}</p>
+        </div>
+
+        <div class="tile free-text">
+            <p>Notes</p>
+            <p>I'm going to need to run a query to pull in all notes associated with this player</p>
+        </div>
+
+        <div class="tile injury-info">
+            <p>Injury Info</p>
+            <p>{{player["injury_info"]}}</p>
+        </div>
+        
+        <div class="tile team-info">
+            <p>Team Info</p>
+            <p>NOTE: Would like to show Quarterback stats for my WRs and OLine stats for my RBs </p>
+            <p>Sub-Note-RB: Specifically, I'd like to know % of plays that are rush attempts, OLine ranking, OLine Rushing Rank, maybe who the backup is?</p>
+            <p>Improvements: {{player["improvements"]}}</p>
+            <p>Disimprovements: {{player["disimprovements"]}}</p>
+        </div>
+
+        <div class="tile player-stats">
+            <p>Player Stats</p>
+        </div>
+
+        <div class="tile rankings">
+            <p>Last Year Rankings</p>
+        </div>
+    </div>
+
+{% endblock %}

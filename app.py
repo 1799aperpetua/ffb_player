@@ -16,7 +16,9 @@ def get_db_connection():
 
 def get_player(player_id):
     conn = get_db_connection()
-    player = conn.execute("SELECT * FROM Players WHERE player_id = ?", (player_id,)).fetchone()
+    player = conn.execute("SELECT Players.*, Teams.*, Teams.name AS team_name FROM Players INNER JOIN Teams ON Players.team_id = Teams.team_id WHERE Players.player_id= ?", (player_id,)).fetchone()
+    # I'm going to need to decouple Notes and players and pass them into my HTML template separately.  I have a fetchone right above, and since I could have multiple notes... I'd need fetchall
+    # Which would only further complicate template info
     conn.close()
     if player is None:
         abort(404)

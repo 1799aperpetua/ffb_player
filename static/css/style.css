@@ -1,6 +1,19 @@
-h1 {
-    border: 2px #eee solid;
-    color: brown;
-    text-align: center;
-    padding: 10px;
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    padding: 20px;
 }
+
+.tile {
+    background-color: blue;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.crucial-info {background-color: #ffcc00;}
+.free-text {background-color: #33cc33;}
+.injury-info {background-color: #ff6666;}
+.team-info {background-color: #3399ff;}
+.player-stats {background-color: #9933ff;}
+.rankings {background-color: #ff9900;}
