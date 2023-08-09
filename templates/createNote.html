@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} Add a note for {{player["name"]}} {% endblock %}</h1>
+    <p>NOTE: Would like to have all of my other notes displayed below so i don't create duplicates</p>
+
+
+    <form method="post">
+        <div class="form-group">
+            <label for="note_type">Title</label>
+            <input type="text" name="note_type"
+            placeholder="Type of Note" class="form-control"
+            value="{{request.form['note_type']}}"></input> 
+        </div>
+
+        <div class="form-group">
+            <label for="note_content">Content</label>
+            <textarea name="note_content" placeholder="Post content"
+            class="form-control">{{request.form['note_content']}}</textarea>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    
+{% endblock %}

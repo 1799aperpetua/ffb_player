@@ -4,7 +4,7 @@ Probably just use pandas and add some columns for the data that I want, that the
 Might be able to find some other data sets to append onto each person's record in the db
 '''
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request, url_for, flash, redirect
 import sqlite3
 import os
 from werkzeug.exceptions import abort
@@ -26,6 +26,7 @@ def get_player(player_id):
         return player
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '473891rpunqt8-0ut-u180ruc28-08ru30'
 
 @app.route('/')
 def index():
@@ -56,6 +57,26 @@ def viewPlayer(player_id):
     return render_template('player.html', player=player)
 
 # Update player
+@app.route('/createNote/<int:player_id>', methods=('GET', 'POST'))
+def createNote(player_id):
+    if request.method == 'POST':
+        print("You received a POST request to create a Note for #", player_id, "\nNote Type of:", request.form['note_type'], "\nNote Content:", request.form['note_content'])
+        note_type = request.form['note_type']
+        note_content = request.form['note_content']
+
+        if not note_type or not note_content:
+            flash("Type of note and content are required!")
+        else:
+            conn = get_db_connection()
+            conn.execute("INSERT INTO Notes (note_id, player_id, note_type, note_content) VALUES (?, ?, ?, ?)",
+                         (None, player_id, note_type, note_content))
+            conn.commit()
+            conn.close()
+            return redirect(url_for('viewPlayer', player_id=player_id))
+    
+    
+    player = get_player(player_id)
+    return render_template('createNote.html', player=player)
 
 # Might use the query below for building out my database
 mapPlayersToTeamsQuery = '''
