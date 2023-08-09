@@ -57,7 +57,7 @@ def viewPlayer(player_id):
     return render_template('player.html', player=player)
 
 # Update player info (Will need to be able to update team info as-well)
-@app.route('/updatePlayer/<int:player_id>')
+@app.route('/updatePlayer/<int:player_id>', methods=('GET', 'POST'))
 def updatePlayer(player_id):
     player = get_player(player_id)
 
@@ -70,6 +70,13 @@ def updatePlayer(player_id):
         injury_info = request.form['injury_info']
 
         conn = get_db_connection()
+        conn.execute("UPDATE Players SET position_tier = ?, position_rank = ?, overall_rank = ?, adp = ?, injury_info = ? WHERE player_id = ?",
+                     (position_tier, position_rank, overall_rank, adp, injury_info, player_id))
+        conn.commit()
+        conn.close()
+        return redirect(url_for('viewPlayer', player_id=player_id))
+    
+    return render_template('editPlayer.html', player=player)
         
 
 # Create a note that belongs to a player

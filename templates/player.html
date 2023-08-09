@@ -2,9 +2,12 @@
 
 {% block content %}
 
-    <h1>{{player["name"]}} &nbsp; {{player["position"]}}</h1>
-    <h6>Question/Idea:  Can/Should we add an identifier column to our Player schema to identify this player's positional ranking within their team?  I.e. Aaron Jones-RB1, AJ Dillon-RB2</h6>
-    <h2>{{player["team_name"]}}</h2> 
+    <h1>{{player["name"]}} &nbsp; {{player["position"]}} &nbsp; &nbsp; &nbsp; 
+        <a href="{{url_for('updatePlayer', player_id=player['player_id'])}}"
+        class="btn btn-primary"> Update Player Info</a>
+    </h1>
+    <h6 style="color:red;">Question/Idea:  Can/Should we add an identifier column to our Player schema to identify this player's positional ranking within their team?  I.e. Aaron Jones-RB1, AJ Dillon-RB2</h6>
+    <h2>{{player["team_name"]}}</h2>
 
     <div class="grid-container">
         <div class="tile crucial-info">
@@ -17,7 +20,7 @@
 
         <div class="tile free-text">
             <p>Notes &nbsp; &nbsp; <a href="{{ url_for('createNote', player_id=player['player_id'])}}" class="btn btn-primary">Create a new Note</a></p>
-            <p>I'm going to need to run a query to pull in all notes associated with this player</p>
+            <p style="color:red;">I'm going to need to run a query to pull in all notes associated with this player</p>
             
         </div>
 
@@ -28,8 +31,8 @@
         
         <div class="tile team-info">
             <p>Team Info</p>
-            <p>NOTE: Would like to show Quarterback stats for my WRs and OLine stats for my RBs </p>
-            <p>Sub-Note-RB: Specifically, I'd like to know % of plays that are rush attempts, OLine ranking, OLine Rushing Rank, maybe who the backup is?</p>
+            <p style="color:red;">NOTE: Would like to show Quarterback stats for my WRs and OLine stats for my RBs </p>
+            <p style="color:red;">Sub-Note-RB: Specifically, I'd like to know % of plays that are rush attempts, OLine ranking, OLine Rushing Rank, maybe who the backup is?</p>
             <p>Improvements: {{player["improvements"]}}</p>
             <p>Disimprovements: {{player["disimprovements"]}}</p>
         </div>
