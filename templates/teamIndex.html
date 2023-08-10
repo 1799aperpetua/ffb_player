@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% block title %} NFL Teams {% endblock %}</h1>
+    <br>
+    {% for team in teams %}
+        <a href="{{ url_for('viewTeam', team_id=team['team_id']) }}">
+            <h3>{{team["name"]}}</h3>
+        </a>
+        <hr>
+    {% endfor %}
+{% endblock %}

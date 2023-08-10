@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>{{team["name"]}} &nbsp; &nbsp; &nbsp; 
+        <a href="{{url_for('updateTeam', team_id=team['team_id'])}}"
+        class="btn btn-primary"> Update Team Info</a>
+    </h1>
+
+    <div class="grid-container">
+        <div class="tile crucial-info">
+            <p>Changes From Last Year</p>
+            <p>Improvements: {{team["improvements"]}}</p>
+            <p>Disimprovements: {{team["disimprovements"]}}</p>
+            <p>General Update:</p>
+        </div>
+
+        <div class="tile free-text">
+            <p>Stats</p>
+            <p>Oline Metrics</p>
+            <p>QB Metrics</p>
+            <p>Coaching Metrics</p>
+            <p style="color:red;">I'm going to need to run a query to pull in all players associated with this team</p>
+            
+        </div>
+
+{% endblock %}

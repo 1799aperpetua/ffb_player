@@ -24,10 +24,20 @@ def get_player(player_id):
         abort(404)
     else:
         return player
+    
+def get_team(team_id):
+    conn = get_db_connection()
+    team = conn.execute("SELECT * FROM Teams WHERE team_id=?", (team_id,)).fetchone()
+    conn.close()
+    if team is None:
+        abort(404)
+    else:
+        return team
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '473891rpunqt8-0ut-u180ruc28-08ru30'
 
+# View all players
 @app.route('/')
 def index():
     conn = get_db_connection()
@@ -47,14 +57,30 @@ def index():
     conn.close()
     return render_template('index.html', players=players)
 
+# View all teams
+@app.route('/teamIndex')
+def teamIndex():
+    conn = get_db_connection()
+    teams = conn.execute("SELECT * FROM Teams").fetchall()
+    conn.close()
+    return render_template('teamIndex.html', teams = teams)
+
 # Create player
 
 
 # Read player
-@app.route('/<int:player_id>')
+@app.route('/player/<int:player_id>')
 def viewPlayer(player_id):
     player = get_player(player_id)
     return render_template('player.html', player=player)
+
+# Read individual team
+@app.route('/team/<int:team_id>')
+def viewTeam(team_id):
+    team = get_team(team_id)
+    return render_template('team.html', team = team)
+    # Would be nice if we passed in all of the players associated with a team broken out by position/position rank within team
+
 
 # Update player info (Will need to be able to update team info as-well)
 @app.route('/updatePlayer/<int:player_id>', methods=('GET', 'POST'))
@@ -77,6 +103,25 @@ def updatePlayer(player_id):
         return redirect(url_for('viewPlayer', player_id=player_id))
     
     return render_template('editPlayer.html', player=player)
+
+# Update a team's information
+@app.route('/updateTeam/<int:team_id>', methods = ('GET', 'POST'))
+def updateTeam(team_id):
+    team = get_team(team_id)
+
+    if request.method == 'POST':
+        improvements = request.form['improvements']
+        disimprovements = request.form['disimprovements']
+
+        conn = get_db_connection()
+        conn.execute("UPDATE Teams SET improvements = ?, disimprovements = ? WHERE team_id = ?",
+                     (improvements, disimprovements, team_id))
+        
+        conn.commit()
+        conn.close()
+        return redirect(url_for('viewTeam', team_id=team_id))
+    
+    return render_template('updateTeam.html', team=team)
         
 
 # Create a note that belongs to a player

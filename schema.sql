@@ -1,6 +1,10 @@
+DROP TABLE Players IF EXISTS;
+DROP TABLE Teams IF EXISTS;
+DROP TABLE Notes IF EXISTS;
+
 CREATE TABLE IF NOT EXISTS Players (
     player_id INTEGER PRIMARY KEY,
-    name VARCHAR(255),
+    player_name VARCHAR(255),
     position VARCHAR(255),
     position_tier INT,
     position_rank INT,
@@ -13,9 +17,10 @@ CREATE TABLE IF NOT EXISTS Players (
 
 CREATE TABLE IF NOT EXISTS Teams (
     team_id INTEGER PRIMARY KEY,
-    name TEXT,
+    team_name TEXT,
     improvements TEXT,
-    disimprovements TEXT
+    disimprovements TEXT,
+    general_update TEXT
 );
 
 CREATE TABLE IF NOT EXISTS Notes (
