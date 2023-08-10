@@ -13,13 +13,13 @@ def setupTables():
 
         connection.commit()
         connection.close()
-    except:
-        print("\n!! Failed to setup database tables !!\n")
+    except sqlite3.Error as e:
+        print("\n!! Failed to setup database tables !!\n", e)
         return
     else:
         print("Successfully built tables in the database")
         return
-#setupTables()
+setupTables()
 
 def setupDbConnection():
     '''

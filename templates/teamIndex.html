@@ -5,7 +5,7 @@
     <br>
     {% for team in teams %}
         <a href="{{ url_for('viewTeam', team_id=team['team_id']) }}">
-            <h3>{{team["name"]}}</h3>
+            <h3>{{team["team_name"]}}</h3>
         </a>
         <hr>
     {% endfor %}

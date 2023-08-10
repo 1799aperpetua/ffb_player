@@ -2,7 +2,7 @@
 
 {% block content %}
 
-    <h1>{{player["name"]}} &nbsp; {{player["position"]}} &nbsp; &nbsp; &nbsp; 
+    <h1>{{player["player_name"]}} &nbsp; {{player["position"]}} &nbsp; &nbsp; &nbsp; 
         <a href="{{url_for('updatePlayer', player_id=player['player_id'])}}"
         class="btn btn-primary"> Update Player Info</a>
     </h1>

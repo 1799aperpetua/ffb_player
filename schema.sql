@@ -1,6 +1,6 @@
-DROP TABLE Players IF EXISTS;
-DROP TABLE Teams IF EXISTS;
-DROP TABLE Notes IF EXISTS;
+DROP TABLE IF EXISTS Players;
+DROP TABLE IF EXISTS Teams;
+DROP TABLE IF EXISTS Notes;
 
 CREATE TABLE IF NOT EXISTS Players (
     player_id INTEGER PRIMARY KEY,
@@ -12,7 +12,8 @@ CREATE TABLE IF NOT EXISTS Players (
     adp INT,
     team_id INT,
     injury_info TEXT,
-    FOREIGN KEY (team_id) REFERENCES Teams(team_id) 
+    bye_week INT,
+    FOREIGN KEY (team_id) REFERENCES Teams(team_id)
 );
 
 CREATE TABLE IF NOT EXISTS Teams (
@@ -20,7 +21,8 @@ CREATE TABLE IF NOT EXISTS Teams (
     team_name TEXT,
     improvements TEXT,
     disimprovements TEXT,
-    general_update TEXT
+    general_update TEXT,
+    team_abbreviation TEXT
 );
 
 CREATE TABLE IF NOT EXISTS Notes (

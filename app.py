@@ -10,7 +10,7 @@ import os
 from werkzeug.exceptions import abort
 
 def get_db_connection():
-    conn = sqlite3.connect(os.getcwd() + '/player.db')
+    conn = sqlite3.connect('player.db')
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -45,10 +45,10 @@ def index():
     playerAndTeamQuery = '''
         SELECT
             Players.player_id,
-            Players.name AS player_name,
+            Players.player_name,
             Players.position,
             Players.adp,
-            Teams.name AS team_name
+            Teams.team_name
         FROM 
             Players
         INNER JOIN Teams ON Players.team_id = Teams.team_id;
@@ -151,7 +151,7 @@ mapPlayersToTeamsQuery = '''
     UPDATE Players 
     SET team_id = Teams.team_id
     FROM Teams
-    WHERE Players.name = ? and Teams.name = ?
+    WHERE Players.player_name = ? and Teams.team_name = ?
 '''
 player_name = "Justin Jefferson"
 team_name = "Minnesota Vikings"
