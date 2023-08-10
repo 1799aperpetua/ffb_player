@@ -16,7 +16,7 @@ def get_db_connection():
 
 def get_player(player_id):
     conn = get_db_connection()
-    player = conn.execute("SELECT Players.*, Teams.*, Teams.name AS team_name FROM Players INNER JOIN Teams ON Players.team_id = Teams.team_id WHERE Players.player_id= ?", (player_id,)).fetchone()
+    player = conn.execute("SELECT Players.*, Teams.* FROM Players INNER JOIN Teams ON Players.team_id = Teams.team_id WHERE Players.player_id= ?", (player_id,)).fetchone()
     # I'm going to need to decouple Notes and players and pass them into my HTML template separately.  I have a fetchone right above, and since I could have multiple notes... I'd need fetchall
     # Which would only further complicate template info
     conn.close()
@@ -56,6 +56,7 @@ def index():
     players = conn.execute(playerAndTeamQuery).fetchall()
     conn.close()
     return render_template('index.html', players=players)
+    # N O T E ! Need to give all my players a team_id so that they'll show up on my index page
 
 # View all teams
 @app.route('/teamIndex')

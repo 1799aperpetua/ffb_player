@@ -7,7 +7,7 @@
         class="btn btn-primary"> Update Player Info</a>
     </h1>
     <h6 style="color:red;">Question/Idea:  Can/Should we add an identifier column to our Player schema to identify this player's positional ranking within their team?  I.e. Aaron Jones-RB1, AJ Dillon-RB2</h6>
-    <h2>{{player["team_name"]}}</h2>
+    <h2>{{player["team_name"]}} <p> ToTheLeft! Make this a hyperlink?</p></h2>
 
     <div class="grid-container">
         <div class="tile crucial-info">
@@ -20,7 +20,8 @@
 
         <div class="tile free-text">
             <p>Notes &nbsp; &nbsp; <a href="{{ url_for('createNote', player_id=player['player_id'])}}" class="btn btn-primary">Create a new Note</a></p>
-            <p style="color:red;">I'm going to need to run a query to pull in all notes associated with this player</p>
+            <p style="color:red;">I'm going to need to run a query to pull in all notes associated with this player.  You know what?  I should probably put this tile on the right side by itself so 
+                it can expand the length of the screen</p>
             
         </div>
 

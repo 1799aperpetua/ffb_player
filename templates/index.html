@@ -2,12 +2,14 @@
 
 {% block content %}
     <h1>{% block title %} Welcome to Fantasy Player Information {% endblock %}</h1>
+    <p style="color:red;">What other information should I list immediately next to each player</p>
+    <p style="color:red;">I need a button so that I can filter by position - Would be great to be able to see two or three, ideally 4 positions simultaneously</p>
     {% for player in players %}
     <br>
         <a href="{{ url_for('viewPlayer', player_id=player['player_id']) }}">
-            <h3>{{player["player_name"]}} - {{player["team_name"]}}</h3>
+            <h5>{{player["player_name"]}} - {{player["team_name"]}}</h5>
         </a>
-        <h5><span class="badge badge-primary"> {{player["position"]}}</span> &nbsp; Average Draft Position: {{player["adp"]}}</h5>
+        <h6><span class="badge badge-primary"> {{player["position"]}}</span> &nbsp; Average Draft Position: {{player["adp"]}}</h6>
         
         <hr>
     {% endfor %}
